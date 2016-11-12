@@ -12,18 +12,19 @@ def readFile(filename):
 
 documents = {}
 
-def readFileIntoDict(filename1,filename2):
+def readFileIntoDict(filename1):
     doc = 1
     with open(filename1,'r') as file:
         for line in file:
             value = line
             documents[doc] = value
             doc += 1
-    with open(filename2,'r') as file:
-        for line in file:
-            value = line
-            documents[doc] = value
-            doc += 1
+
+    #with open(filename2,'r') as file:
+    #    for line in file:
+    #       value = line
+    #        documents[doc] = value
+    #        doc += 1
 
 
 def convertToVector(documents):
@@ -49,6 +50,9 @@ def IDF(IDFTerm):
         IDFDict[key] = 1.0 + math.log(len(vectorizedDocuments) / IDFTerm[key])
 
 
+cosineSimilarities = []
+cosineSimilarityForEachDoc = {}
+
 
 def calculateCosineSimilarity(doc1, doc2):
     dot_product = 0
@@ -67,8 +71,8 @@ def calculateCosineSimilarity(doc1, doc2):
 
 if __name__ == "__main__":
     wiki1File = os.path.join("data", "wiki1.csr")
-    wiki2File = os.path.join("data", "wiki2.csr")
-    readFileIntoDict(wiki1File, wiki2File)
+    #wiki2File = os.path.join("data", "wiki2.csr")
+    readFileIntoDict(wiki1File)
     convertToVector(documents)
     IDF(IDFTerm)
     #print(len(vectorizedDocuments))
